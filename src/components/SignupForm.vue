@@ -20,6 +20,8 @@
         <input type="checkbox" required v-model="terms">
         <label>Accept terms and conditions</label>
     </div>
+    <button class="signup-button">Sign Up</button>
+   
   </form>
 </template>
 
@@ -69,5 +71,22 @@ input[type='checkbox']{
     margin: 0 10px 0 0;
     position: relative;
     top: 2px;
+}
+.signup-button {
+      padding: 10px 20px;
+      background-color: #0afa87;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+}.signup-button {
+      padding: 10px 20px;
+      background-color: #0afa87;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
 }
 </style>
