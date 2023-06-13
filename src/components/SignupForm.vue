@@ -2,40 +2,53 @@
   <form>
     <label>Email:</label>
     <input type="email" required v-model="email">
-    <label>Password:</label>
-    <input type="password" required v-model="password">
-    <label>Role:</label><br>
-    <select v-model="role">
-        <option value="developer">Web developer</option>
-        <option value="designer">Web Designer</option>
-    </select>
-    <label>Occupation</label>
-    <select v-model="occupation">
-        <option value="student">Student</option>
-        <option value="self-employment">Self-employed</option>
-        <option value="employed">Employed</option>
-        <option value="not say">Rather not say</option>
-    </select>
+    <div class="input-container">
+      <label for="password">Password:</label>
+      <input type="password" id="password" v-model="password" />
+    </div>
+    <div class="input-container">
+      <label for="confirm-password">Confirm Password:</label>
+      <input type="password" id="confirm-password" v-model="confirmPassword" />
+      <span id="password-error" class="error-message">{{ passwordError }}</span>
+    </div><br>
     <div class="terms">
         <input type="checkbox" required v-model="terms">
         <label>Accept terms and conditions</label>
     </div>
-    <button class="signup-button">Sign Up</button>
+    <button class="signup-button" @click.prevent="signUp">Sign Up</button>
    
   </form>
 </template>
 
 <script>
 export default {
-    data(){
-        return {
-            email: '',
-            password: '',
-            role: 'designer',
-            terms: false,
-            occupation: ''
-        }
+  data() {
+    return {
+      email: '',
+      password: '',
+      confirmPassword: '',
+      role: 'designer',
+      terms: false,
+      occupation: '',
+      passwordError: ''
     }
+  },
+  watch: {
+    confirmPassword(newVal) {
+      if (newVal === this.password) {
+        this.passwordError = '';
+      }
+    }
+  },
+  methods: {
+    signUp() {
+      if (this.password === this.confirmPassword) {
+        alert('Sign up successful!');
+      } else {
+        this.passwordError = 'Passwords do not match.';
+      }
+    }
+  }
 }
 </script>
 <style>
@@ -80,13 +93,12 @@ input[type='checkbox']{
       border-radius: 5px;
       font-size: 16px;
       cursor: pointer;
-}.signup-button {
-      padding: 10px 20px;
-      background-color: #0afa87;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
 }
+.input-container {
+      margin-bottom: 10px;
+    }
+    .error-message {
+      color: red;
+      font-weight: bolder;
+    }
 </style>
