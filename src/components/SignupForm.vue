@@ -1,5 +1,6 @@
 <template>
   <form>
+    <p>signup</p>
     <label>Email:</label>
     <input type="email" required v-model="email">
     <div class="input-container">
@@ -42,14 +43,23 @@ export default {
   },
   methods: {
     signUp() {
-      if (this.password === this.confirmPassword) {
-        alert('Sign up successful!');
-      } else {
-        this.passwordError = 'Passwords do not match.';
+      if (!this.validateForm()) {
+        return;
       }
-    }
+      alert('Sign up successful!');
+    },
+    validateForm() {
+      if (!this.email || !this.password || !this.confirmPassword || !this.terms) {
+        alert('Please fill in all required fields.');
+        return false;
+      }
+      if (this.password !== this.confirmPassword) {
+        this.passwordError = 'Passwords do not match.';
+        return false;
+      }
+      return true;
+    }}
   }
-}
 </script>
 <style>
 form{
@@ -99,6 +109,6 @@ input[type='checkbox']{
     }
     .error-message {
       color: red;
-      font-weight: bolder;
+      font-weight: bold;
     }
 </style>
